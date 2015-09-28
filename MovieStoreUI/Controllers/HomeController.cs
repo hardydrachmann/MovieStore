@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MovieStoreUI.Controllers
 {
+    // Nej tak til HomeController
     public class HomeController : Controller
     {
         public ActionResult Index()
