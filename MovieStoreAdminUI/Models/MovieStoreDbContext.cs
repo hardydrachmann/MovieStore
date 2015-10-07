@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace MovieStoreUI.Models
+namespace MovieStoreAdminUI.Models
 {
     public class MovieStoreDbContext : DbContext
     {
@@ -15,14 +15,10 @@ namespace MovieStoreUI.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public MovieStoreDbContext() : base("name=MovieStoreDbContext")
+        public MovieStoreDbContext() : base("MovieStore")
         {
         }
 
-        public System.Data.Entity.DbSet<MusicStoreDAL.Movie> Movies { get; set; }
-
-        public System.Data.Entity.DbSet<MusicStoreDAL.Customer> Customers { get; set; }
-
-        public System.Data.Entity.DbSet<MusicStoreDAL.Order> Orders { get; set; }
+        public DbSet<MusicStoreDAL.Movie> Movies { get; set; }
     }
 }
