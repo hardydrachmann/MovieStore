@@ -8,22 +8,18 @@ namespace MovieStoreAdminUI.Controllers
 {
     public class OrderController : Controller
     {
-        private MovieStoreDbContext db = new MovieStoreDbContext();
+        private OrderRepository repo = new OrderRepository();
 
         // GET: Order
         public ActionResult Index()
         {
-            return View(db.Orders.ToList());
+            return View(repo.GetAll());
         }
 
         // GET: Order/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = db.Orders.Find(id);
+            Order order = repo.Get(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -42,12 +38,11 @@ namespace MovieStoreAdminUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Date")] Order order)
+        public ActionResult Create(Order order)
         {
             if (ModelState.IsValid)
             {
-                db.Orders.Add(order);
-                db.SaveChanges();
+                repo.Add(order);
                 return RedirectToAction("Index");
             }
 
@@ -55,13 +50,9 @@ namespace MovieStoreAdminUI.Controllers
         }
 
         // GET: Order/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = db.Orders.Find(id);
+            Order order = repo.Get(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -74,25 +65,20 @@ namespace MovieStoreAdminUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Date")] Order order)
+        public ActionResult Edit(Order order)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
-                db.SaveChanges();
+                repo.Edit(order);
                 return RedirectToAction("Index");
             }
             return View(order);
         }
 
         // GET: Order/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = db.Orders.Find(id);
+            Order order = repo.Get(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -105,9 +91,7 @@ namespace MovieStoreAdminUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
-            db.SaveChanges();
+            repo.Remove(id);
             return RedirectToAction("Index");
         }
 
@@ -115,7 +99,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                repo.Dispose();
             }
             base.Dispose(disposing);
         }

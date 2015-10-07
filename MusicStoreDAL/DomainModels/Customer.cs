@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieStoreDAL
 {
@@ -19,5 +20,6 @@ namespace MovieStoreDAL
         public string Country { get; set; }
         [Display(Name = "E-Mail")]
         public string Email { get; set; }
+        public virtual List<Order> Orders { get; set; }
     }
 }

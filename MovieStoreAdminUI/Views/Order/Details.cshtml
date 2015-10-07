@@ -10,12 +10,32 @@
     <h4>Order</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        @*Date*@
         <dt>
             @Html.DisplayNameFor(model => model.Date)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        @*Customer*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+
+        @*Movie*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Movie.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Movie.Title)
         </dd>
 
     </dl>

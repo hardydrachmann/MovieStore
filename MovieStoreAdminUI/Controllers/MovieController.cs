@@ -1,6 +1,4 @@
 ﻿using MovieStoreDAL;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -8,22 +6,18 @@ namespace MovieStoreAdminUI.Controllers
 {
     public class MovieController : Controller
     {
-        private MovieStoreDbContext db = new MovieStoreDbContext();
+        private MovieRepository repo = new MovieRepository();
 
         // GET: Movie
         public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            return View(repo.GetAll());
         }
 
         // GET: Movie/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = db.Movies.Find(id);
+            Movie movie = repo.Get(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -42,12 +36,11 @@ namespace MovieStoreAdminUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Price,Year,ImageURL,TrailerURL,Genre")] Movie movie)
+        public ActionResult Create(Movie movie)
         {
             if (ModelState.IsValid)
             {
-                db.Movies.Add(movie);
-                db.SaveChanges();
+                repo.Add(movie);
                 return RedirectToAction("Index");
             }
 
@@ -55,13 +48,9 @@ namespace MovieStoreAdminUI.Controllers
         }
 
         // GET: Movie/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = db.Movies.Find(id);
+            Movie movie = repo.Get(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -74,25 +63,20 @@ namespace MovieStoreAdminUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Price,Year,ImageURL,TrailerURL,Genre")] Movie movie)
+        public ActionResult Edit(Movie movie)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(movie).State = EntityState.Modified;
-                db.SaveChanges();
+                repo.Edit(movie);                
                 return RedirectToAction("Index");
             }
             return View(movie);
         }
 
         // GET: Movie/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = db.Movies.Find(id);
+            Movie movie = repo.Get(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -104,10 +88,8 @@ namespace MovieStoreAdminUI.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {
-            Movie movie = db.Movies.Find(id);
-            db.Movies.Remove(movie);
-            db.SaveChanges();
+        {           
+            repo.Remove(id);            
             return RedirectToAction("Index");
         }
 
@@ -115,7 +97,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                repo.Dispose();
             }
             base.Dispose(disposing);
         }
