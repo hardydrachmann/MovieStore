@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStoreDAL", "MusicStoreDAL\MusicStoreDAL.csproj", "{9A9D475C-560D-4CCA-9B4A-5780CC04B6B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStoreDAL", "MusicStoreDAL\MovieStoreDAL.csproj", "{9A9D475C-560D-4CCA-9B4A-5780CC04B6B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStoreAdminUI", "MovieStoreAdminUI\MovieStoreAdminUI.csproj", "{60C32165-C7DC-470C-A104-B4CF6AB3A9F7}"
 EndProject

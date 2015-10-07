@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
-namespace MovieStoreAdminUI.Models
+namespace MovieStoreDAL
 {
     public class MovieStoreDbContext : DbContext
     {
@@ -19,6 +15,10 @@ namespace MovieStoreAdminUI.Models
         {
         }
 
-        public DbSet<MusicStoreDAL.Movie> Movies { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
     }
 }

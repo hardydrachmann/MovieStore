@@ -1,112 +1,112 @@
-﻿using MovieStoreDAL;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using MovieStoreDAL;
 
 namespace MovieStoreAdminUI.Controllers
 {
-    public class MovieController : Controller
+    public class CustomerController : Controller
     {
         private MovieStoreDbContext db = new MovieStoreDbContext();
 
-        // GET: Movie
+        // GET: Customer
         public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            return View(db.Customers.ToList());
         }
 
-        // GET: Movie/Details/5
+        // GET: Customer/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
-            if (movie == null)
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(customer);
         }
 
-        // GET: Movie/Create
+        // GET: Customer/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Movie/Create
+        // POST: Customer/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Price,Year,ImageURL,TrailerURL,Genre")] Movie movie)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,StreetName,StreetNumber,ZipCode,Country,Email")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                db.Movies.Add(movie);
+                db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(movie);
+            return View(customer);
         }
 
-        // GET: Movie/Edit/5
+        // GET: Customer/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
-            if (movie == null)
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(customer);
         }
 
-        // POST: Movie/Edit/5
+        // POST: Customer/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Price,Year,ImageURL,TrailerURL,Genre")] Movie movie)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,StreetName,StreetNumber,ZipCode,Country,Email")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(movie).State = EntityState.Modified;
+                db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(movie);
+            return View(customer);
         }
 
-        // GET: Movie/Delete/5
+        // GET: Customer/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
-            if (movie == null)
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(customer);
         }
 
-        // POST: Movie/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Movie movie = db.Movies.Find(id);
-            db.Movies.Remove(movie);
+            Customer customer = db.Customers.Find(id);
+            db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

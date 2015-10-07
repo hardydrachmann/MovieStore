@@ -1,8 +1,14 @@
-﻿@model IEnumerable<MusicStoreDAL.Movie>
+﻿@model IEnumerable<MovieStoreDAL.Movie>
 
 @{
     ViewBag.Title = "Index";
 }
+
+<style>
+    .poster{
+        height:5em;
+    }
+</style>
 
 <h2>Index</h2>
 
@@ -43,11 +49,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Year)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageURL)
+        <td>            
+            <a href="@item.ImageURL" target="_blank"><img class="poster" src="@item.ImageURL" /></a>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TrailerURL)
+            <a href="@item.TrailerURL" target="_blank">Click for trailer</a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Genre)
