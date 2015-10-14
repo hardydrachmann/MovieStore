@@ -7,9 +7,17 @@
 <br />
 
 <div>
-    <h4>Order</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        @*Order*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
 
         @*Date*@
         <dt>

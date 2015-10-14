@@ -4,6 +4,7 @@ namespace MovieStoreDAL
 {
     public class Movie
     {
+        [Display(Name = "Movie Number")]
         public int Id { get; set; }
         public string Title { get; set; }
         [Display(Name = "Price (Dkk)")]
