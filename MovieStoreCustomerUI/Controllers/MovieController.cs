@@ -52,7 +52,7 @@ namespace MovieStoreAdminUI.Controllers
                 if (eMail == customer.Email)
                 {
                     Order order = new Order() {
-                        Date = "" + DateTime.Now.Date,
+                        Date = "" + DateTime.Now,
                         CustomerId = customer.Id,
                         MovieId = movieId
                     };
