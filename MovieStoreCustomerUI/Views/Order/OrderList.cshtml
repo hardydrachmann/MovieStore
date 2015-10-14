@@ -1,0 +1,43 @@
+﻿@model MovieStoreDAL.Customer
+
+@{
+    ViewBag.Title = "OrderList";
+}
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            Order Number
+        </th>        
+        <th>
+            Movie
+        </th>
+        <th>
+            Date
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Orders)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>            
+            <td>
+                @Html.DisplayFor(modelItem => item.Movie.Title)
+            </td>            
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    <a href="~/Movie">Back to List</a>
+</p>
+
+
+

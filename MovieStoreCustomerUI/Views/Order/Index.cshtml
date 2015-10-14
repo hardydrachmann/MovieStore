@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Email login
+        </dt>
+
+        <dd>
+            @using (Html.BeginForm("OrderList", "Order"))
+            {
+                @Html.AntiForgeryToken()
+                <input type="text" name="eMail" />
+                <input type="submit" value="Show Orders" />
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    <a href="~/Movie">Back to List</a>
+</p>
