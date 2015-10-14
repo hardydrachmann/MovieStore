@@ -1,5 +1,4 @@
 ﻿using MovieStoreDAL;
-using System.Net;
 using System.Web.Mvc;
 
 namespace MovieStoreAdminUI.Controllers
