@@ -1,0 +1,43 @@
+﻿@model MovieStoreDAL.Movie
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<style>
+    .poster {
+        height: 5em;
+    }
+</style>
+
+<br />
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            Email login
+        </dt>
+
+        <dd>
+            @using (Html.BeginForm("Completion", "Movie"))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" value="@Model.Id" name="movieId" />
+                <input type="text"name="eMail" />
+                <input type="submit" value="Buy" />
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

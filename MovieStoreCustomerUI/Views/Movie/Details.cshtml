@@ -4,10 +4,15 @@
     ViewBag.Title = "Details";
 }
 
+<style>
+    .poster {
+        height: 5em;
+    }
+</style>
+
 <br />
 
 <div>
-    <h4>Movie</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -39,7 +44,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImageURL)
+            <a href="@Model.ImageURL" target="_blank"><img class="poster" src="@Model.ImageURL" /></a>
         </dd>
 
         <dt>
@@ -47,7 +52,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TrailerURL)
+            <a href="@Model.TrailerURL" target="_blank">Click for trailer</a>
         </dd>
 
         <dt>
@@ -58,9 +63,14 @@
             @Html.DisplayFor(model => model.Genre)
         </dd>
 
+        <dt>
+            Buy
+        </dt>
+        <dd>
+            <a href="~/Movie/Checkout/@Model.Id"><button> Checkout </button></a>
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

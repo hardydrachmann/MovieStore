@@ -13,31 +13,15 @@
 <br />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrailerURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Genre)
-        </th>
+        </th>        
         <th></th>
     </tr>
 
@@ -45,30 +29,14 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Year)
             </td>
+
             <td>
-                <a href="@item.ImageURL" target="_blank"><img class="poster" src="@item.ImageURL" /></a>
-            </td>
-            <td>
-                <a href="@item.TrailerURL" target="_blank">Click for trailer</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <a href="~/Movie/Details/@item.Id"><button> Buy </button></a>
             </td>
         </tr>
     }
