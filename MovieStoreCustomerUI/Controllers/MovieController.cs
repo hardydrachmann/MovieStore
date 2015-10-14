@@ -6,7 +6,7 @@ namespace MovieStoreAdminUI.Controllers
 {
     public class MovieController : Controller
     {
-        private MovieRepository repo = new MovieRepository();
+        private MovieRepository repo = new MovieRepository();        
 
         // GET: Movie
         public ActionResult Index()
