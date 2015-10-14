@@ -1,4 +1,6 @@
 ﻿using MovieStoreDAL;
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 
@@ -6,18 +8,20 @@ namespace MovieStoreAdminUI.Controllers
 {
     public class MovieController : Controller
     {
-        private MovieRepository repo = new MovieRepository();        
+        private MovieRepository movRepo = new MovieRepository();
+        private CustomerRepository cusRepo = new CustomerRepository();
+        private OrderRepository ordRepo = new OrderRepository();
 
         // GET: Movie
         public ActionResult Index()
         {
-            return View(repo.GetAll());
+            return View(movRepo.GetAll());
         }
 
         // GET: Movie/Details/5
         public ActionResult Details(int id)
         {
-            Movie movie = repo.Get(id);
+            Movie movie = movRepo.Get(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -25,79 +29,46 @@ namespace MovieStoreAdminUI.Controllers
             return View(movie);
         }
 
-        // GET: Movie/Create
-        public ActionResult Create()
+        // Checkout (id)
+        public ActionResult Checkout(int id)
         {
-            return View();
+            Movie movie = movRepo.Get(id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+            return View(movie);
         }
 
-        // POST: Movie/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Checkout (Email)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Movie movie)
+        public ActionResult Completion(string eMail, int movieId)
         {
-            if (ModelState.IsValid)
+            Movie movie = movRepo.Get(movieId);
+
+            IEnumerable<Customer> customers = cusRepo.GetAll();
+            foreach (var customer in customers)
             {
-                repo.Add(movie);
-                return RedirectToAction("Index");
+                if (eMail == customer.Email)
+                {
+                    Order order = new Order() {
+                        Date = "" + DateTime.Now.Date,
+                        CustomerId = customer.Id,
+                        MovieId = movieId
+                    };
+                    ordRepo.Add(order);                    
+                    return View(movie);
+                }
             }
-
-            return View(movie);
-        }
-
-        // GET: Movie/Edit/5
-        public ActionResult Edit(int id)
-        {
-            Movie movie = repo.Get(id);
-            if (movie == null)
-            {
-                return HttpNotFound();
-            }
-            return View(movie);
-        }
-
-        // POST: Movie/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Movie movie)
-        {
-            if (ModelState.IsValid)
-            {
-                repo.Edit(movie);                
-                return RedirectToAction("Index");
-            }
-            return View(movie);
-        }
-
-        // GET: Movie/Delete/5
-        public ActionResult Delete(int id)
-        {
-            Movie movie = repo.Get(id);
-            if (movie == null)
-            {
-                return HttpNotFound();
-            }
-            return View(movie);
-        }
-
-        // POST: Movie/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {           
-            repo.Remove(id);            
-            return RedirectToAction("Index");
+            return Redirect("~/Movie/Checkout/" + movieId);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                repo.Dispose();
+                movRepo.Dispose();
             }
             base.Dispose(disposing);
         }
