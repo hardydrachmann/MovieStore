@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainModels\Customer.cs" />
+    <Compile Include="MovieStoreDbInitializer.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="DomainModels\Movie.cs" />
