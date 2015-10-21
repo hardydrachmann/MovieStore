@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace MovieStoreDAL.Initializer
 {
-    public class MovieStoreDbInitializer : DropCreateDatabaseAlways<MovieStoreDbContext>
+    public class MovieStoreDbInitializer : DropCreateDatabaseIfModelChanges<MovieStoreDbContext>
     {
         private List<Customer> Customers = new List<Customer>()
         {
