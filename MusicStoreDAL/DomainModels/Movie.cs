@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MovieStoreDAL.DomainModels;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieStoreDAL
 {
@@ -15,6 +17,6 @@ namespace MovieStoreDAL
         public string ImageURL { get; set; }
         [Display(Name = "Trailer")]
         public string TrailerURL { get; set; }
-        public string Genre { get; set; }
+        public List<Genre> Genres { get; set; }
     }
 }

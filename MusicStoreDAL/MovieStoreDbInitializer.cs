@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MovieStoreDAL.DomainModels;
+using System.Collections.Generic;
 using System.Data.Entity;
 
 namespace MovieStoreDAL.Initializer
@@ -7,12 +8,13 @@ namespace MovieStoreDAL.Initializer
     {
         private List<Customer> Customers = new List<Customer>()
         {
-            new Customer() {FirstName = "Rasmus", LastName="Nielsen", StreetName="Jyllandsgade", StreetNumber=52, ZipCode=6700, Email="rasmniel@gmail.com", Country="Denmark" }
+            new Customer() {FirstName = "Rasmus", LastName="Nielsen", StreetName="Jyllandsgade", StreetNumber=52, ZipCode=6700, Email="rasmniel@gmail.com", Country="Denmark" },
+            new Customer() {FirstName= "dfbgdf", LastName= "dsfg", StreetName= "", StreetNumber=1, ZipCode=1, Email="", Country="" }
         };
 
         private List<Movie> Movies = new List<Movie>()
         {
-            new Movie() { Title="Bloodsport", Year=1983, Price=150, ImageURL="#", TrailerURL="#", Genre="Test" }
+            new Movie() { Title="Bloodsport", Year=1983, Price=150, ImageURL="#", TrailerURL="#", Genres = new List<Genre> { new Genre() { Name="Action" } } }
         };
 
         protected override void Seed(MovieStoreDbContext context)

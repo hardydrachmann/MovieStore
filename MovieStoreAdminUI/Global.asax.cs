@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieStoreDAL.Initializer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,7 @@ namespace MovieStoreAdminUI
     {
         protected void Application_Start()
         {
+            MovieStoreDbInitializer.Initialize();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
