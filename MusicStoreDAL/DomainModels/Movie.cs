@@ -16,7 +16,7 @@ namespace MovieStoreDAL
         [Display(Name = "Image")]
         public string ImageURL { get; set; }
         [Display(Name = "Trailer")]
-        public string TrailerURL { get; set; }
-        public List<Genre> Genres { get; set; }
+        public string TrailerURL { get; set; }        
+        public virtual List<Genre> Genres { get; set; }
     }
 }

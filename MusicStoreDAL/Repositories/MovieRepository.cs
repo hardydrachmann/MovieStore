@@ -21,7 +21,7 @@ namespace MovieStoreDAL
 
         public void Edit(Movie entity)
         {
-            db.Entry(entity).State = EntityState.Modified;
+            db.Entry(entity).State = EntityState.Modified;       
             db.SaveChanges();
         }
 

@@ -1,4 +1,7 @@
 ﻿using MovieStoreDAL;
+using MovieStoreDAL.DomainModels;
+using MovieStoreDAL.Repositories;
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 
@@ -6,18 +9,20 @@ namespace MovieStoreAdminUI.Controllers
 {
     public class MovieController : Controller
     {
-        private MovieRepository repo = new MovieRepository();
+        private MovieRepository movRepo = new MovieRepository();
+        private GenreRepository genRepo = new GenreRepository();
 
         // GET: Movie
         public ActionResult Index()
         {
-            return View(repo.GetAll());
+            ViewBag.AllGenres = genRepo.GetAll();
+            return View(movRepo.GetAll());
         }
 
         // GET: Movie/Details/5
         public ActionResult Details(int id)
         {
-            Movie movie = repo.Get(id);
+            Movie movie = movRepo.Get(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -40,7 +45,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                repo.Add(movie);
+                movRepo.Add(movie);
                 return RedirectToAction("Index");
             }
 
@@ -50,11 +55,12 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Movie/Edit/5
         public ActionResult Edit(int id)
         {
-            Movie movie = repo.Get(id);
+            Movie movie = movRepo.Get(id);
             if (movie == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.AllGenres = genRepo.GetAll();
             return View(movie);
         }
 
@@ -64,10 +70,10 @@ namespace MovieStoreAdminUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Movie movie)
-        {
+        {  
             if (ModelState.IsValid)
-            {
-                repo.Edit(movie);                
+            {           
+                movRepo.Edit(movie);
                 return RedirectToAction("Index");
             }
             return View(movie);
@@ -76,7 +82,7 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Movie/Delete/5
         public ActionResult Delete(int id)
         {
-            Movie movie = repo.Get(id);
+            Movie movie = movRepo.Get(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -88,8 +94,8 @@ namespace MovieStoreAdminUI.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {           
-            repo.Remove(id);            
+        {
+            movRepo.Remove(id);
             return RedirectToAction("Index");
         }
 
@@ -97,7 +103,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (disposing)
             {
-                repo.Dispose();
+                movRepo.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -15,6 +15,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<select style="float:right" name="Genres">
+    @foreach (var genre in ViewBag.AllGenres)
+    {
+        <option>@genre.Name</option>
+    }
+</select>
 <table class="table">
     <tr>
         <th>
@@ -36,7 +42,7 @@
             @Html.DisplayNameFor(model => model.TrailerURL)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genre)
+            @Html.DisplayNameFor(model => model.Genres)
         </th>
         <th></th>
     </tr>
@@ -63,7 +69,12 @@
                 <a href="@item.TrailerURL" target="_blank">Click for trailer</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Genre)
+                <select>
+                    @foreach (var genre in item.Genres)
+                    {
+                        <option value="@genre.Name">@genre.Name</option>
+                    }
+                </select>
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

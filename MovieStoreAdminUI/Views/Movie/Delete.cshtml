@@ -52,11 +52,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Genre)
+            @Html.DisplayNameFor(model => model.Genres)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Genre)
+            <select>
+                @foreach (var genre in Model.Genres)
+                {
+                    <option value="@genre.Name">@genre.Name</option>
+                }
+            </select>            
         </dd>
 
     </dl>

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using MovieStoreDAL.DomainModels;
+using System.Data.Entity;
 
 namespace MovieStoreDAL
 {
@@ -14,6 +15,8 @@ namespace MovieStoreDAL
         public MovieStoreDbContext() : base("MovieStore")
         {
         }
+
+        public DbSet<Genre> Genres { get; set; }
 
         public DbSet<Movie> Movies { get; set; }
 
