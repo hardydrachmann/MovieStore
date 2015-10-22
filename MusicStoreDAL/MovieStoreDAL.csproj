@@ -55,6 +55,7 @@
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="DomainModels\Movie.cs" />
+    <Compile Include="Repositories\GenreRepository.cs" />
     <Compile Include="Repositories\MovieRepository.cs" />
     <Compile Include="MovieStoreDbContext.cs" />
     <Compile Include="DomainModels\Order.cs" />
