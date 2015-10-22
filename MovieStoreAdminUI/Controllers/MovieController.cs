@@ -1,8 +1,5 @@
 ﻿using MovieStoreDAL;
-using MovieStoreDAL.DomainModels;
 using MovieStoreDAL.Repositories;
-using System.Collections.Generic;
-using System.Net;
 using System.Web.Mvc;
 
 namespace MovieStoreAdminUI.Controllers
