@@ -36,7 +36,7 @@ namespace MovieStoreDAL.Initializer
                 new Movie() { Title="Bloodsport", Year=1983, Price=150,
                     ImageURL ="https://images.rapgenius.com/77ce1bab38b4efec4250aae81d7c579d.680x1000x1.jpg",
                     TrailerURL ="https://www.youtube.com/watch?v=8CLz2Hh9uqM",
-                    Genres = new List<Genre>() { Genres[0] }
+                    Genres = new List<Genre>() { Genres[0], Genres[3] }
                 },
 
                 new Movie() { Title="Mars Attacks", Year=1996, Price=100,

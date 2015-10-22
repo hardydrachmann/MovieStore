@@ -1,6 +1,10 @@
 ﻿using MovieStoreDAL;
 using MovieStoreDAL.Repositories;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Linq;
+using MovieStoreAdminUI.Models;
+using MovieStoreDAL.DomainModels;
 
 namespace MovieStoreAdminUI.Controllers
 {
@@ -10,10 +14,18 @@ namespace MovieStoreAdminUI.Controllers
         private GenreRepository genRepo = new GenreRepository();
 
         // GET: Movie
-        public ActionResult Index()
+        public ActionResult Index(string genre)
         {
-            ViewBag.AllGenres = genRepo.GetAll();
-            return View(movRepo.GetAll());
+            MovieViewModel model = new MovieViewModel();
+            model.Genres = genRepo.GetAll();
+            IEnumerable<Movie> movies = movRepo.GetAll();
+            if (genre != null && genre.Length > 0)
+            {
+                model.SelectedGenre = genre;
+                movies = movies.Where(x => x.Genres.Any(y => y.Name.Equals(genre)));
+            }
+            model.Movies = movies;
+            return View(model);
         }
 
         // GET: Movie/Details/5
@@ -67,13 +79,12 @@ namespace MovieStoreAdminUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Movie movie)
-        {  
+        {
             if (ModelState.IsValid)
-            {           
+            {
                 movRepo.Edit(movie);
-                return RedirectToAction("Index");
             }
-            return View(movie);
+            return RedirectToAction("Index");
         }
 
         // GET: Movie/Delete/5

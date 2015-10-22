@@ -21,7 +21,7 @@ namespace MovieStoreDAL
 
         public void Edit(Movie entity)
         {
-            db.Entry(entity).State = EntityState.Modified;       
+            db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
         }
 
@@ -38,6 +38,13 @@ namespace MovieStoreDAL
         public void Remove(int id)
         {
             var mov = Get(id);
+            db.Movies.Remove(mov);
+            db.SaveChanges();
+        }
+
+        public void Remove(Movie entity)
+        {
+            var mov = Get(entity.Id);
             db.Movies.Remove(mov);
             db.SaveChanges();
         }

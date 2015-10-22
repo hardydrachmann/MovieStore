@@ -26,6 +26,7 @@ namespace MovieStoreDAL
         public string Country { get; set; }
 
         [Display(Name = "E-Mail")]
+        [StringLength(50)]
         public string Email { get; set; }
 
         public virtual List<Order> Orders { get; set; }
