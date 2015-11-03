@@ -10,13 +10,24 @@ namespace MovieStoreTests
     [TestFixture]
     public class FakeTests
     {
+        // This this will pass
         [Test]
-        public void FakeTest()
+        public void FakeTestOne()
         {
             int numberOne = 1;
             int numberTwo = 2;
 
             Assert.AreNotEqual(numberOne, numberTwo);
+        }
+
+        // This this will fail
+        [Test]
+        public void FakeTestTwo()
+        {
+            int numberOne = 1;
+            int numberTwo = 2;
+
+            Assert.AreEqual(numberOne, numberTwo);
         }
     }
 }
