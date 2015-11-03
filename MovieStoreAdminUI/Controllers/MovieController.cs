@@ -25,7 +25,6 @@ namespace MovieStoreAdminUI.Controllers
                 movies = movies.Where(x => x.Genres.Any(y => y.Name.Equals(genre)));
             }
             model.Movies = movies;
-            hjj
             return View(model);
         }
 
