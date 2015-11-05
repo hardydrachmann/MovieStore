@@ -10,7 +10,7 @@ namespace MovieStoreTests
     [TestFixture]
     public class FakeTests
     {
-        // This this will pass
+        // This test will pass
         [Test]
         public void FakeTestOne()
         {
@@ -20,7 +20,7 @@ namespace MovieStoreTests
             Assert.AreNotEqual(numberOne, numberTwo);
         }
 
-        // This this will fail
+        // This test will fail
         [Test]
         public void FakeTestTwo()
         {
