@@ -10,8 +10,8 @@ namespace MovieStoreAdminUI.Controllers
 {
     public class MovieController : Controller
     {
-        private MovieRepository movRepo = new MovieRepository();
-        private GenreRepository genRepo = new GenreRepository();
+        private readonly MovieRepository movRepo = new MovieRepository();
+        private readonly GenreRepository genRepo = new GenreRepository();
 
         // GET: Movie
         public ActionResult Index(string genre)
@@ -19,7 +19,7 @@ namespace MovieStoreAdminUI.Controllers
             MovieViewModel model = new MovieViewModel();
             model.Genres = genRepo.GetAll();
             IEnumerable<Movie> movies = movRepo.GetAll();
-            if (genre != null && genre.Length > 0)
+            if (!string.IsNullOrEmpty(genre))
             {
                 model.SelectedGenre = genre;
                 movies = movies.Where(x => x.Genres.Any(y => y.Name.Equals(genre)));
@@ -42,7 +42,10 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Movie/Create
         public ActionResult Create()
         {
-            return View();
+            CreateMovieViewModel model = new CreateMovieViewModel();
+            model.AllGenres = genRepo.GetAll();
+            model.Movie = new Movie();
+            return View(model);
         }
 
         // POST: Movie/Create
@@ -55,10 +58,15 @@ namespace MovieStoreAdminUI.Controllers
             if (ModelState.IsValid)
             {
                 movRepo.Add(movie);
-                return RedirectToAction("Index");
+                if (movie.Genres != null)
+                {
+                    foreach (var genre in movie.Genres)
+                    {
+                        genRepo.Add(genre);
+                    }
+                }
             }
-
-            return View(movie);
+            return RedirectToAction("Index");
         }
 
         // GET: Movie/Edit/5
