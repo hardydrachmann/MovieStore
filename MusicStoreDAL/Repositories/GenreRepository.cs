@@ -32,12 +32,12 @@ namespace MovieStoreDAL.Repositories
 
         public Genre Get(int id)
         {
-            return db.Genres.Include(gen => gen.Movies).FirstOrDefault(gen => gen.Id == id);
+            return db.Genres.FirstOrDefault(gen => gen.Id == id);
         }
 
         public IEnumerable<Genre> GetAll()
         {
-            return db.Genres.Include(gen => gen.Movies).ToList();
+            return db.Genres.ToList();
         }
 
         public void Remove(int id)

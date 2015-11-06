@@ -12,6 +12,5 @@ namespace MovieStoreAdminUI.Models
         public IEnumerable<Movie> Movies { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
         public string SelectedGenre { get; set; }
-
     }
 }

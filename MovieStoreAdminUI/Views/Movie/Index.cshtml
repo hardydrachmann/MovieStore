@@ -19,7 +19,7 @@
 <form action="~/Movie/index" method="POST">
     <select name="genre" onchange="this.form.submit()">
         <option value="">All</option>
-        @foreach (var genre in Model.Genres)
+        @*@foreach (var genre in Model.Genres)
         {
             if (Model.SelectedGenre == genre.Name)
             {
@@ -29,7 +29,7 @@
             {
                 <option value=@genre.Name>@genre.Name</option>
             }
-        }
+        }*@
     </select>
 </form>
 <table class="table">

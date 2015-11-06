@@ -3,6 +3,7 @@ using MovieStoreDAL.Repositories;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
+using MovieStoreAdminUI.Infrastructure;
 using MovieStoreAdminUI.Models;
 using MovieStoreDAL.DomainModels;
 
@@ -10,15 +11,16 @@ namespace MovieStoreAdminUI.Controllers
 {
     public class MovieController : Controller
     {
-        private readonly MovieRepository movRepo = new MovieRepository();
-        private readonly GenreRepository genRepo = new GenreRepository();
+        //private readonly MovieRepository movRepo = new MovieRepository();
+        //private readonly GenreRepository genRepo = new GenreRepository();
+        private readonly ServiceGateway gateway = new ServiceGateway();
 
         // GET: Movie
         public ActionResult Index(string genre)
         {
             MovieViewModel model = new MovieViewModel();
-            model.Genres = genRepo.GetAll();
-            IEnumerable<Movie> movies = movRepo.GetAll();
+            //model.Genres = gateway.GetAllGenres();
+            IEnumerable<Movie> movies = gateway.GetMovies();
             if (!string.IsNullOrEmpty(genre))
             {
                 model.SelectedGenre = genre;
@@ -31,7 +33,7 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Movie/Details/5
         public ActionResult Details(int id)
         {
-            Movie movie = movRepo.Get(id);
+            Movie movie = gateway.GetMovie(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -43,7 +45,7 @@ namespace MovieStoreAdminUI.Controllers
         public ActionResult Create()
         {
             CreateMovieViewModel model = new CreateMovieViewModel();
-            model.AllGenres = genRepo.GetAll();
+            //model.AllGenres = gateway.GetAllGenres();
             model.Movie = new Movie();
             return View(model);
         }
@@ -57,14 +59,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                movRepo.Add(movie);
-                if (movie.Genres != null)
-                {
-                    foreach (var genre in movie.Genres)
-                    {
-                        genRepo.Add(genre);
-                    }
-                }
+                gateway.CreateMovie(movie);
             }
             return RedirectToAction("Index");
         }
@@ -72,12 +67,12 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Movie/Edit/5
         public ActionResult Edit(int id)
         {
-            Movie movie = movRepo.Get(id);
+            Movie movie = gateway.GetMovie(id);
             if (movie == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AllGenres = genRepo.GetAll();
+            //ViewBag.AllGenres = gateway.GetAllGenres();
             return View(movie);
         }
 
@@ -90,7 +85,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                movRepo.Edit(movie);
+                gateway.UpdateMovie(movie);
             }
             return RedirectToAction("Index");
         }
@@ -98,7 +93,7 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Movie/Delete/5
         public ActionResult Delete(int id)
         {
-            Movie movie = movRepo.Get(id);
+            Movie movie = gateway.GetMovie(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -111,17 +106,8 @@ namespace MovieStoreAdminUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            movRepo.Remove(id);
+            gateway.DeleteMovie(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                movRepo.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
