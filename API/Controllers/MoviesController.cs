@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
 using MovieStoreDAL;
 using API.Models;
-using MovieStoreDAL.DomainModels;
+using MovieStoreDAL.Repositories;
 
 namespace API.Controllers
 {
     public class MoviesController : ApiController
     {
-        //private readonly MovieRepository movRepo = new MovieRepository();
-        private MokRepo movRepo = new MokRepo();
+        private readonly MovieRepository movieRepo = new MovieRepository();
 
         /// <summary>
         /// Get all movies
@@ -25,7 +18,7 @@ namespace API.Controllers
         /// <returns></returns>
         public IEnumerable<Movie> GetAllMovies()
         {
-            return movRepo.GetAll();
+            return movieRepo.GetAll();
         }
 
         /// <summary>
@@ -35,7 +28,7 @@ namespace API.Controllers
         /// <returns></returns>
         public Movie GetMovie(int id)
         {
-            Movie movie = movRepo.Get(id);
+            Movie movie = movieRepo.Get(id);
             if (movie == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -50,7 +43,7 @@ namespace API.Controllers
         /// <returns></returns>
         public HttpResponseMessage PostMovie(Movie movie)
         {
-            movRepo.Add(movie);
+            movieRepo.Add(movie);
             return Request.CreateResponse(HttpStatusCode.Created, movie);
         }
 
@@ -61,7 +54,7 @@ namespace API.Controllers
         /// <returns></returns>
         public HttpResponseMessage PutMovie(Movie movie)
         {
-            movRepo.Edit(movie);
+            movieRepo.Edit(movie);
             return Request.CreateResponse(HttpStatusCode.Accepted, movie);
         }
 
@@ -71,7 +64,7 @@ namespace API.Controllers
         /// <param name="id"></param>
         public void DeleteMovie(int id)
         {
-            movRepo.Remove(id);
+            movieRepo.Remove(id);
         }
     }
 }

@@ -1,12 +1,10 @@
 ﻿using MovieStoreDAL;
+using MovieStoreDAL.DomainModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Web;
 using System.Web.Configuration;
-using MovieStoreDAL.DomainModels;
 
 namespace MovieStoreAdminUI.Infrastructure
 {
@@ -25,6 +23,7 @@ namespace MovieStoreAdminUI.Infrastructure
                 new MediaTypeWithQualityHeaderValue("application/json")
             );
         }
+
         public IEnumerable<Movie> GetMovies()
         {
             HttpResponseMessage response = client.GetAsync("api/movies/").Result;
@@ -55,6 +54,13 @@ namespace MovieStoreAdminUI.Infrastructure
         {
             HttpResponseMessage response = client.DeleteAsync("api/movies/" + id).Result;
             return response;
+        }
+
+        public IEnumerable<Genre> GetAllGenres()
+        {
+            HttpResponseMessage response = client.GetAsync("api/genres/").Result;
+            var genres = response.Content.ReadAsAsync<IEnumerable<Genre>>().Result;
+            return genres;
         }
     }
 }

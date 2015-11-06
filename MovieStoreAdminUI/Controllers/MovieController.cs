@@ -1,25 +1,21 @@
 ﻿using MovieStoreDAL;
-using MovieStoreDAL.Repositories;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
 using MovieStoreAdminUI.Infrastructure;
 using MovieStoreAdminUI.Models;
-using MovieStoreDAL.DomainModels;
 
 namespace MovieStoreAdminUI.Controllers
 {
     public class MovieController : Controller
     {
-        //private readonly MovieRepository movRepo = new MovieRepository();
-        //private readonly GenreRepository genRepo = new GenreRepository();
         private readonly ServiceGateway gateway = new ServiceGateway();
 
         // GET: Movie
         public ActionResult Index(string genre)
         {
             MovieViewModel model = new MovieViewModel();
-            //model.Genres = gateway.GetAllGenres();
+            model.Genres = gateway.GetAllGenres();
             IEnumerable<Movie> movies = gateway.GetMovies();
             if (!string.IsNullOrEmpty(genre))
             {
@@ -45,7 +41,7 @@ namespace MovieStoreAdminUI.Controllers
         public ActionResult Create()
         {
             CreateMovieViewModel model = new CreateMovieViewModel();
-            //model.AllGenres = gateway.GetAllGenres();
+            model.AllGenres = gateway.GetAllGenres();
             model.Movie = new Movie();
             return View(model);
         }
@@ -72,7 +68,7 @@ namespace MovieStoreAdminUI.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.AllGenres = gateway.GetAllGenres();
+            ViewBag.AllGenres = gateway.GetAllGenres();
             return View(movie);
         }
 
