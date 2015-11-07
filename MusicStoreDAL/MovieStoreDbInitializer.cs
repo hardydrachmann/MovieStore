@@ -33,16 +33,22 @@ namespace MovieStoreDAL.Initializer
         {
             List<Movie> Movies = new List<Movie>()
             {
-                new Movie() { Title="Bloodsport", Year=1983, Price=150,
-                    ImageURL ="https://images.rapgenius.com/77ce1bab38b4efec4250aae81d7c579d.680x1000x1.jpg",
-                    TrailerURL ="https://www.youtube.com/watch?v=8CLz2Hh9uqM",
-                    Genres = new List<Genre>() { Genres[0], Genres[3] }
+                new Movie() { Title = "Bloodsport", Year = 1983, Price = 150,
+                    ImageURL = "https://images.rapgenius.com/77ce1bab38b4efec4250aae81d7c579d.680x1000x1.jpg",
+                    TrailerURL = "https://www.youtube.com/watch?v=8CLz2Hh9uqM",
+                    Genres = new List<Genre>() { Genres[0] }
                 },
 
-                new Movie() { Title="Mars Attacks", Year=1996, Price=100,
-                    ImageURL ="http://vignette3.wikia.nocookie.net/voiceacting/images/7/74/Mars_Attacks_DVD_Cover.jpg/revision/latest?cb=20130517084655",
-                    TrailerURL ="https://www.youtube.com/watch?v=VYHeZCEFwhI",
+                new Movie() { Title = "Mars Attacks", Year = 1996, Price = 100,
+                    ImageURL = "http://vignette3.wikia.nocookie.net/voiceacting/images/7/74/Mars_Attacks_DVD_Cover.jpg/revision/latest?cb=20130517084655",
+                    TrailerURL = "https://www.youtube.com/watch?v=VYHeZCEFwhI",
                     Genres = new List<Genre>() { Genres[3], Genres[4] }
+                },
+
+                new Movie() { Title="Kung Pow", Year=2002, Price=100,
+                    ImageURL = "https://upload.wikimedia.org/wikipedia/en/5/54/Kungpow.jpg",
+                    TrailerURL = "https://www.youtube.com/watch?v=GXrAYdSeWY8",
+                    Genres = new List<Genre>() { Genres[0], Genres[4] }
                 }
             };
 
