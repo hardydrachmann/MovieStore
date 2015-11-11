@@ -2,25 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using MovieStoreCustomerUI.Infrastructure;
 
 namespace MovieStoreAdminUI.Controllers
 {
     public class MovieController : Controller
     {
-        private MovieRepository movRepo = new MovieRepository();
-        private CustomerRepository cusRepo = new CustomerRepository();
-        private OrderRepository ordRepo = new OrderRepository();
+        private readonly ServiceGateway gateway = new ServiceGateway();
 
         // GET: Movie
         public ActionResult Index()
         {
-            return View(movRepo.GetAll());
+            return View(gateway.GetMovies());
         }
 
         // GET: Movie/Details/5
         public ActionResult Details(int id)
         {
-            Movie movie = movRepo.Get(id);
+            Movie movie = gateway.GetMovie(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -31,7 +30,7 @@ namespace MovieStoreAdminUI.Controllers
         // Checkout (id)
         public ActionResult Checkout(int id)
         {
-            Movie movie = movRepo.Get(id);
+            Movie movie = gateway.GetMovie(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -44,9 +43,9 @@ namespace MovieStoreAdminUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Completion(string eMail, int movieId)
         {
-            Movie movie = movRepo.Get(movieId);
+            Movie movie = gateway.GetMovie(movieId);
 
-            IEnumerable<Customer> customers = cusRepo.GetAll();
+            IEnumerable<Customer> customers = gateway.GetCustomers();
             foreach (var customer in customers)
             {
                 if (eMail == customer.Email)
@@ -56,20 +55,11 @@ namespace MovieStoreAdminUI.Controllers
                         CustomerId = customer.Id,
                         MovieId = movieId
                     };
-                    ordRepo.Add(order);                    
+                    gateway.CreateOrder(order);                    
                     return View(movie);
                 }
             }
             return Redirect("~/Movie/Checkout/" + movieId);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                movRepo.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

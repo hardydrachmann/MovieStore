@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Linq;
 using MovieStoreAdminUI.Infrastructure;
 using MovieStoreAdminUI.Models;
+using BLL;
 
 namespace MovieStoreAdminUI.Controllers
 {
@@ -12,15 +13,29 @@ namespace MovieStoreAdminUI.Controllers
         private readonly ServiceGateway gateway = new ServiceGateway();
 
         // GET: Movie
-        public ActionResult Index(string genre)
+        public ActionResult Index(string genre, string currency)
         {
             MovieViewModel model = new MovieViewModel();
             model.Genres = gateway.GetGenres();
             IEnumerable<Movie> movies = gateway.GetMovies();
+            // determine selected genre
             if (!string.IsNullOrEmpty(genre))
             {
                 model.SelectedGenre = genre;
                 movies = movies.Where(x => x.Genres.Any(y => y.Name.Equals(genre)));
+            }
+            // determine selected currency
+            if (!string.IsNullOrEmpty(currency))
+            {
+                model.SelectedCurrency = currency;
+                foreach (var movie in movies)
+                {
+                    movie.Price = CurrencyConverter.ConvertPrice(movie.Price, currency);
+                }
+            }
+            else
+            {
+                model.SelectedCurrency = CurrencyConverter.DKK;
             }
             model.Movies = movies;
             return View(model);

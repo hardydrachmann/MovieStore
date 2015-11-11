@@ -11,5 +11,15 @@ namespace MovieStoreAdminUI.Models
         public IEnumerable<Movie> Movies { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
         public string SelectedGenre { get; set; }
+        public string SelectedCurrency { get; set; }
+        public List<string> CurrencyStrings { get; private set; }
+
+        public MovieViewModel()
+        {
+            CurrencyStrings = new List<string>();
+            CurrencyStrings.Add("DKK");
+            CurrencyStrings.Add("EUR");
+            CurrencyStrings.Add("USD");
+        }
     }
 }

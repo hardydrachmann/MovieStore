@@ -212,6 +212,10 @@
       <Project>{bd1738b4-7cc4-490c-9a72-ce6bcf44bc98}</Project>
       <Name>BE</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{04d1bc83-e2e9-411d-8853-b61169322820}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

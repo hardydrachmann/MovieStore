@@ -16,6 +16,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+@*Dropdown : genre & currency select*@
 <form action="~/Movie/index" method="POST">
     <select name="genre" onchange="this.form.submit()">
         <option value="">All</option>
@@ -31,6 +32,19 @@
             }
         }
     </select>
+    <select name="currency" onchange="this.form.submit()">
+        @foreach (var currency in Model.CurrencyStrings)
+        {
+            if (Model.SelectedCurrency == currency)
+            {
+                <option selected="selected" value="@currency">@currency</option>
+            }
+            else
+            {
+                <option value="@currency">@currency</option>
+            }
+        }
+    </select>
 </form>
 <table class="table">
     <tr>
@@ -41,7 +55,7 @@
             @Html.DisplayNameFor(model => model.Movies.FirstOrDefault().Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Movies.FirstOrDefault().Price)
+            @Html.DisplayNameFor(model => model.Movies.FirstOrDefault().Price) @Model.SelectedCurrency
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Movies.FirstOrDefault().Year)

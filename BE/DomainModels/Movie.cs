@@ -10,7 +10,7 @@ namespace MovieStoreBE
 
         public string Title { get; set; }
 
-        [Display(Name = "Price (Dkk)")]
+        [Display(Name = "Price")]
         public double Price { get; set; }
 
         [Display(Name = "Release Year")]

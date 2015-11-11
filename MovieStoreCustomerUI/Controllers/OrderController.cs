@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using MovieStoreCustomerUI.Infrastructure;
 
 public class OrderController : Controller
 {
-    private CustomerRepository cusRepo = new CustomerRepository();
-    private OrderRepository ordRepo = new OrderRepository();
+    private readonly ServiceGateway gateway = new ServiceGateway();
 
     // GET: Order
     public ActionResult Index()
@@ -17,7 +17,7 @@ public class OrderController : Controller
     // Order List
     public ActionResult OrderList(string eMail)
     {
-        IEnumerable<Customer> customers = cusRepo.GetAll();
+        IEnumerable<Customer> customers = gateway.GetCustomers();
 
         foreach (var customer in customers)
         {
