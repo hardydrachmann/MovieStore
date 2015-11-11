@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using MovieStoreDAL;
+using MovieStoreBE;
 
 namespace MovieStoreAdminUI.Controllers
 {

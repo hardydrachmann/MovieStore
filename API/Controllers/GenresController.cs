@@ -1,4 +1,4 @@
-﻿using MovieStoreDAL.DomainModels;
+﻿using MovieStoreBE;
 using MovieStoreDAL.Repositories;
 using System.Collections.Generic;
 using System.Web.Http;

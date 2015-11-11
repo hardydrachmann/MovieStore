@@ -43,12 +43,12 @@ namespace API.Models
 
         public void Dispose()
         {
-            
+
         }
 
         public void Edit(Movie entity)
         {
-            
+
         }
 
         public Movie Get(int id)
@@ -68,12 +68,12 @@ namespace API.Models
 
         public void Remove(int id)
         {
-            
+
         }
 
         public IEnumerable<Genre> GetAllGenres()
         {
             return Genres;
-        } 
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using MovieStoreDAL;
-using MovieStoreDAL.DomainModels;
+﻿using MovieStoreBE;
 using System.Collections.Generic;
 
 namespace MovieStoreAdminUI.Models

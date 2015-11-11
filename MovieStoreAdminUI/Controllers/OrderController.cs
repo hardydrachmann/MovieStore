@@ -1,7 +1,4 @@
-﻿using MovieStoreDAL;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
+﻿using MovieStoreBE;
 using System.Web.Mvc;
 
 namespace MovieStoreAdminUI.Controllers

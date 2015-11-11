@@ -1,5 +1,4 @@
-﻿using MovieStoreDAL;
-using MovieStoreDAL.DomainModels;
+﻿using MovieStoreBE;
 using System;
 using System.Collections.Generic;
 using System.Linq;

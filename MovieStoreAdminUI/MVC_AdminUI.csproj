@@ -208,9 +208,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MusicStoreDAL\DAL.csproj">
-      <Project>{9a9d475c-560d-4cca-9b4a-5780cc04b6b7}</Project>
-      <Name>DAL</Name>
+    <ProjectReference Include="..\BE\BE.csproj">
+      <Project>{bd1738b4-7cc4-490c-9a72-ce6bcf44bc98}</Project>
+      <Name>BE</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

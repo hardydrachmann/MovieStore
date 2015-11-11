@@ -49,22 +49,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainModels\Customer.cs" />
-    <Compile Include="DomainModels\Genre.cs" />
     <Compile Include="MovieStoreDbInitializer.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="DomainModels\Movie.cs" />
     <Compile Include="Repositories\GenreRepository.cs" />
     <Compile Include="Repositories\MovieRepository.cs" />
     <Compile Include="MovieStoreDbContext.cs" />
-    <Compile Include="DomainModels\Order.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BE\BE.csproj">
+      <Project>{bd1738b4-7cc4-490c-9a72-ce6bcf44bc98}</Project>
+      <Name>BE</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

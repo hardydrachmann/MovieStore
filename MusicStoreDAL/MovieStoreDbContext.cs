@@ -1,4 +1,4 @@
-﻿using MovieStoreDAL.DomainModels;
+﻿using MovieStoreBE;
 using System.Data.Entity;
 
 namespace MovieStoreDAL

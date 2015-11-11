@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_CustomerUI", "MovieStor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{C0B04471-C2D3-4B6D-AB7D-4A53A7E479E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BE", "BE\BE.csproj", "{BD1738B4-7CC4-490C-9A72-CE6BCF44BC98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C0B04471-C2D3-4B6D-AB7D-4A53A7E479E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0B04471-C2D3-4B6D-AB7D-4A53A7E479E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0B04471-C2D3-4B6D-AB7D-4A53A7E479E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD1738B4-7CC4-490C-9A72-CE6BCF44BC98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD1738B4-7CC4-490C-9A72-CE6BCF44BC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD1738B4-7CC4-490C-9A72-CE6BCF44BC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD1738B4-7CC4-490C-9A72-CE6BCF44BC98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

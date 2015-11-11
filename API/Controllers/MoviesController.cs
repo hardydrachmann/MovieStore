@@ -3,8 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using MovieStoreDAL;
-using API.Models;
-using MovieStoreDAL.Repositories;
+using MovieStoreBE;
 
 namespace API.Controllers
 {
