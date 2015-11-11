@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Core;
 using NUnit.Framework;
 using BLL;
-using MovieStoreBE;
 
 namespace Tests
 {
