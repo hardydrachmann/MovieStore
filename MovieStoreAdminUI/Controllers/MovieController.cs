@@ -15,7 +15,7 @@ namespace MovieStoreAdminUI.Controllers
         public ActionResult Index(string genre)
         {
             MovieViewModel model = new MovieViewModel();
-            model.Genres = gateway.GetAllGenres();
+            model.Genres = gateway.GetGenres();
             IEnumerable<Movie> movies = gateway.GetMovies();
             if (!string.IsNullOrEmpty(genre))
             {
@@ -41,7 +41,7 @@ namespace MovieStoreAdminUI.Controllers
         public ActionResult Create()
         {
             CreateMovieViewModel model = new CreateMovieViewModel();
-            model.AllGenres = gateway.GetAllGenres();
+            model.AllGenres = gateway.GetGenres();
             model.Movie = new Movie();
             return View(model);
         }
@@ -68,7 +68,7 @@ namespace MovieStoreAdminUI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AllGenres = gateway.GetAllGenres();
+            ViewBag.AllGenres = gateway.GetGenres();
             return View(movie);
         }
 

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web.Http;
 using MovieStoreDAL;
 using MovieStoreBE;
+using MovieStoreDAL.Repositories;
 
 namespace API.Controllers
 {

@@ -1,22 +1,23 @@
 ﻿using MovieStoreBE;
 using System.Web.Mvc;
+using MovieStoreAdminUI.Infrastructure;
 
 namespace MovieStoreAdminUI.Controllers
 {
     public class OrderController : Controller
     {
-        private OrderRepository repo = new OrderRepository();
+        private readonly ServiceGateway gateway = new ServiceGateway();
 
         // GET: Order
         public ActionResult Index()
         {
-            return View(repo.GetAll());
+            return View(gateway.GetOrders());
         }
 
         // GET: Order/Details/5
         public ActionResult Details(int id)
         {
-            Order order = repo.Get(id);
+            Order order = gateway.GetOrder(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -39,7 +40,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                repo.Add(order);
+                gateway.CreateOrder(order);
                 return RedirectToAction("Index");
             }
 
@@ -49,7 +50,7 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Order/Edit/5
         public ActionResult Edit(int id)
         {
-            Order order = repo.Get(id);
+            Order order = gateway.GetOrder(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -66,7 +67,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                repo.Edit(order);
+                gateway.UpdateOrder(order);
                 return RedirectToAction("Index");
             }
             return View(order);
@@ -75,7 +76,7 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Order/Delete/5
         public ActionResult Delete(int id)
         {
-            Order order = repo.Get(id);
+            Order order = gateway.GetOrder(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -88,17 +89,8 @@ namespace MovieStoreAdminUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            repo.Remove(id);
+            gateway.DeleteOrder(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                repo.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

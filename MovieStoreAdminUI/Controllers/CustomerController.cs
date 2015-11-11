@@ -2,24 +2,25 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using MovieStoreAdminUI.Infrastructure;
 using MovieStoreBE;
 
 namespace MovieStoreAdminUI.Controllers
 {
     public class CustomerController : Controller
     {
-        private CustomerRepository repo = new CustomerRepository();
+        private readonly ServiceGateway gateway = new ServiceGateway();
 
         // GET: Customer
         public ActionResult Index()
         {
-            return View(repo.GetAll());
+            return View(gateway.GetCustomers());
         }
 
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
-            Customer customer = repo.Get(id);
+            Customer customer = gateway.GetCustomer(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -42,7 +43,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                repo.Add(customer);
+                gateway.CreateCustomer(customer);
                 return RedirectToAction("Index");
             }
 
@@ -52,7 +53,7 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
-            Customer customer = repo.Get(id);
+            Customer customer = gateway.GetCustomer(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -69,7 +70,7 @@ namespace MovieStoreAdminUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                repo.Edit(customer);
+                gateway.UpdateCustomer(customer);
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -78,7 +79,7 @@ namespace MovieStoreAdminUI.Controllers
         // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
-            Customer customer = repo.Get(id);
+            Customer customer = gateway.GetCustomer(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -91,17 +92,8 @@ namespace MovieStoreAdminUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            repo.Remove(id);
+            gateway.DeleteCustomer(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                repo.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
